@@ -280,7 +280,8 @@ class ApiClient<R extends RawApi> {
         // Wait for result
         try {
             const res = await Promise.race(operations);
-            console.log(await res.clone().text())
+            console.log(res.status, res.statusText);
+            console.log("text:", await res.clone().text());
             return await res.clone().json();
         } finally {
             if (timeout.handle !== undefined) clearTimeout(timeout.handle);
